@@ -2,8 +2,13 @@ package com.juanguachi.webservice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
 
     public void listar(View view){
@@ -39,20 +42,37 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Emoji>> call, Response<List<Emoji>> response) {
                 if(response.isSuccessful()){
                     emojiList=response.body();
-                    
 
-                    TextView textView=findViewById(R.id.txt_vista);
-                    String nombre=emojiList.get(0).getName();
-                    Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();
-                    textView.setText(nombre);
+
+                    //TextView textView=findViewById(R.id.txt_vista);
+                    //String nombre=emojiList.get(0).getName();
+                    //Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();
+                    //textView.setText(nombre + emojiList.size());
+                    ArrayList<String>EmojisString=new ArrayList<>();
+                    for(int i=0;emojiList.size()>i;i++){
+                        EmojisString.add(emojiList.get(i).toString());
+                        //nombre= nombre +", "+ i ;
+                    }
+
+                    ArrayList<String>Emojisnombres=new ArrayList<>();
+                    for(int i=0;emojiList.size()>i;i++){
+                        Emojisnombres.add(emojiList.get(i).getName());
+                        //nombre= nombre +", "+ i ;
+                    }
+                    ListView listView=(ListView) findViewById(R.id.listEmojis);
+                    ArrayAdapter adaptador = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, EmojisString);
+                    listView.setAdapter(adaptador);
 
                 }
             }
-
             @Override
             public void onFailure(Call<List<Emoji>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+
+    public  void listarEmojis(){
     }
 }

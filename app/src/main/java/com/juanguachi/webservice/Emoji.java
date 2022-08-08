@@ -61,4 +61,14 @@ public class Emoji {
         this.unicode = unicode;
     }
 
+    @Override
+    public String toString() {
+        return "Emoji{" +
+                "name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", group='" + group + '\'' +
+                ", htmlCode=" + htmlCode +
+                ", unicode=" + unicode +
+                '}';
+    }
 }
