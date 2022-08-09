@@ -43,21 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     emojiList=response.body();
 
-
-                    //TextView textView=findViewById(R.id.txt_vista);
-                    //String nombre=emojiList.get(0).getName();
-                    //Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();
-                    //textView.setText(nombre + emojiList.size());
                     ArrayList<String>EmojisString=new ArrayList<>();
                     for(int i=0;emojiList.size()>i;i++){
                         EmojisString.add(emojiList.get(i).toString());
-                        //nombre= nombre +", "+ i ;
                     }
 
                     ArrayList<String>Emojisnombres=new ArrayList<>();
                     for(int i=0;emojiList.size()>i;i++){
                         Emojisnombres.add(emojiList.get(i).getName());
-                        //nombre= nombre +", "+ i ;
                     }
                     ListView listView=(ListView) findViewById(R.id.listEmojis);
                     ArrayAdapter adaptador = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, EmojisString);
@@ -72,7 +65,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    public  void listarEmojis(){
-    }
 }
